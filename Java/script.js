@@ -3,98 +3,59 @@ var operators = "+-/*=";
 var rightHand = "";
 var selectedOperator = "";
 var result = "";
-var equal = document.getElementsByClassName("result").value;
+var equal = "";
 var intege = parseFloat(leftHand);
 var integer1 = parseFloat(rightHand);
+var number=["1","2","3","4","5","6",
+"7",
+"8",
+"9",
+"0","+", "-", "*", "/"]
 document.addEventListener("keydown", function (event) {
   let key = event.key;
   if (
-    (key == "1",
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8",
-    "9",
-    "0" && rightHand != "" && !selectedOperator == "")
-  ) {
-    rightHand += key;
-  } else if (
-    (key == "1",
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8",
-    "9",
-    "0" && rightHand == "" && !selectedOperator == "")
-  ) {
-    rightHand += key;
-  }
-  if (
-    (key == "1", "2", "3", "4", "5", "6", "7", "8", "9", "0" && leftHand == "")
-  ) {
-    leftHand += key;
-  } else if (
-    (key == "1",
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8",
-    "9",
-    "0" && leftHand != "" && selectedOperator == "")
-  ) {
-    leftHand += key;
-  }
+    number.includes(key))
+   {
+    buttonsDown(key)
 
-  // var equal = document.getElementsByClassName("result").value;
-  //   var intege = parseFloat(leftHand);
-  //   var integer1 = parseFloat(rightHand);
-  //  if(key=="/"){
-  //   equal = intege / integer1;
-  //  }
-  document.getElementById("childs").innerHTML =
-    leftHand + selectedOperator + rightHand;
-  // console.log(resultFrom);
-  $("#childs").css("font-size", "30px");
-  $("#childs").css("float", "right");
-});
-document.addEventListener("keydown", function (event) {
-  let key = event.key;
+   }else if(key=="="){
+    // console.log(answerFor)
+    answerFor()
+    
+}});
+// document.addEventListener("keydown", function (event) {
+//   let key = event.key;
 
-  if (key == "=" && selectedOperator == "+") {
-    equal = key + intege + integer1;
-    console.log(equa);
-  } else if (key == "=" && selectedOperator == "-") {
-    equal = intege - integer1;
-  } else if (key == "=" && selectedOperator == "*") {
-    equal = intege * integer1;
-  } else if (key == "=" && selectedOperator == "/") {
-    equal = intege / integer1;
-  } else if (key == "=" && selectedOperator == "=") {
-    equal += leftHand;
-  } else result = equal;
-  document.getElementById("childs").innerHTML =
-    leftHand + selectedOperator + rightHand;
-  // console.log(resultFrom);
-  $("#childs").css("font-size", "30px");
-  $("#childs").css("float", "right");
-});
+//   if (key == "=" && selectedOperator == "+") {
+//     equal = key + intege + integer1;
+//     console.log(equa);
+//   } else if (key == "=" && selectedOperator == "-") {
+//     equal = intege - integer1;
+//   } else if (key == "=" && selectedOperator == "*") {
+//     equal = intege * integer1;
+//   } else if (key == "=" && selectedOperator == "/") {
+//     equal = intege / integer1;
+//   } else if (key == "=" && selectedOperator == "=") {
+//     equal += leftHand;
+//   } else result = equal;
+//   document.getElementById("childs").innerHTML =
+//     leftHand + selectedOperator + rightHand;
+//   // console.log(resultFrom);
+//   $("#childs").css("font-size", "30px");
+//   $("#childs").css("float", "right");
+// });
+
+
+ 
 
 $(".clearAll").click(function deleteFunction() {
-  document.getElementById("childs").innerHTML = "0";
+  document.querySelector("#demo").innerHTML = "0";
   leftHand = "";
   selectedOperator = "";
   rightHand = "";
-  $("#childs").css("font-size", "30px");
-  $("#childs").css("float", "right");
+  $("#answer").css("font-size", "30px");
+  $("#answer").css("float", "right");
+  
   // $("#childs").css("margin-top", "17px");
 });
 
@@ -114,10 +75,10 @@ $(".pointss").click(function pointsss(ell) {
     leftHand += points;
   }
 
-  document.getElementById("childs").innerHTML =
+  document.getElementById("answer").innerHTML =
     leftHand + selectedOperator + rightHand;
-  $("#childs").css("font-size", "30px");
-  $("#childs").css("float", "right");
+  $("#answer").css("font-size", "30px");
+  $("#answer").css("float", "right");
   // $("#childs").css("margin-top", "17px");
 });
 $(".back").click(function backOne() {
@@ -132,16 +93,41 @@ $(".back").click(function backOne() {
     if (leftHand != "") leftHand = leftHand.substring(0, leftHand.length - 1);
   }
 
-  document.getElementById("childs").innerHTML =
+  document.getElementById("answer").innerHTML =
     leftHand + selectedOperator + rightHand;
 
-  $("#childs").css("font-size", "30px");
-  $("#childs").css("float", "right");
+  $("#answer").css("font-size", "30px");
+  $("#answer").css("float", "right");
   // $("#childs").css("margin-top", "17px");
 });
 
-$(".equalTo").click(function answerFor() {
-  var equal = document.getElementsByClassName("result").value;
+$(".equalTo").on("click", answerFor)
+
+
+function buttonsDown(value) {
+  if (operators.includes(value)) {
+    selectedOperator = value;
+
+    if (leftHand == "" && result == "") {
+      leftHand = "0";
+    } else if (result != "" && leftHand == "") {
+      leftHand += result;
+      result = "";
+    }
+  } else if (selectedOperator == "") {
+    leftHand += value;
+  } else {
+    rightHand += value;
+  }
+
+  document.getElementById("answer").innerHTML =
+    leftHand + selectedOperator + rightHand;
+  $("#answer").css("font-size", "30px");
+  $("#answer").css("float", "right");
+  // $("#childs").css("margin-top", "17px");
+}
+function answerFor() {
+  // var equal = document.getElementsByClassName("result").value;
   var intege = parseFloat(leftHand);
   var integer1 = parseFloat(rightHand);
   if (selectedOperator == "+") {
@@ -164,27 +150,4 @@ $(".equalTo").click(function answerFor() {
   $("#childs").css("font-size", "30px");
   $("#childs").css("float", "right");
   $("#childs").css("margin-top", "40px");
-});
-
-function buttonsDown(value) {
-  if (operators.includes(value)) {
-    selectedOperator = value;
-
-    if (leftHand == "" && result == "") {
-      leftHand = "0";
-    } else if (result != "" && leftHand == "") {
-      leftHand += result;
-      result = "";
-    }
-  } else if (selectedOperator == "") {
-    leftHand += value;
-  } else {
-    rightHand += value;
-  }
-
-  document.getElementById("childs").innerHTML =
-    leftHand + selectedOperator + rightHand;
-  $("#childs").css("font-size", "30px");
-  $("#childs").css("float", "right");
-  // $("#childs").css("margin-top", "17px");
 }
