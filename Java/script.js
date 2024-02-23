@@ -6,23 +6,31 @@ var result = "";
 var equal = "";
 var intege = parseFloat(leftHand);
 var integer1 = parseFloat(rightHand);
-var number=["1","2","3","4","5","6",
-"7",
-"8",
-"9",
-"0","+", "-", "*", "/"]
+var number = [
+  "1",
+  "2",
+  "3",
+  "4",
+  "5",
+  "6",
+  "7",
+  "8",
+  "9",
+  "0",
+  "+",
+  "-",
+  "*",
+  "/",
+];
 document.addEventListener("keydown", function (event) {
   let key = event.key;
-  if (
-    number.includes(key))
-   {
-    buttonsDown(key)
-
-   }else if(key=="="){
+  if (number.includes(key)) {
+    buttonsDown(key);
+  } else if (key == "=") {
     // console.log(answerFor)
-    answerFor()
-    
-}});
+    answerFor();
+  }
+});
 // document.addEventListener("keydown", function (event) {
 //   let key = event.key;
 
@@ -45,9 +53,6 @@ document.addEventListener("keydown", function (event) {
 //   $("#childs").css("float", "right");
 // });
 
-
- 
-
 $(".clearAll").click(function deleteFunction() {
   document.querySelector("#demo").innerHTML = "0";
   leftHand = "";
@@ -55,7 +60,7 @@ $(".clearAll").click(function deleteFunction() {
   rightHand = "";
   $("#answer").css("font-size", "30px");
   $("#answer").css("float", "right");
-  
+
   // $("#childs").css("margin-top", "17px");
 });
 
@@ -101,8 +106,7 @@ $(".back").click(function backOne() {
   // $("#childs").css("margin-top", "17px");
 });
 
-$(".equalTo").on("click", answerFor)
-
+$(".equalTo").on("click", answerFor);
 
 function buttonsDown(value) {
   if (operators.includes(value)) {
